@@ -10,39 +10,6 @@ from pymongo.errors import DuplicateKeyError
 from db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_mode_for_user, get_room, is_room_member, \
     get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages
 
-#ml imports
-import numpy as np  
-from tensorflow.keras.models import load_model
-import joblib
-import json
-
-# ML SENTIMENT ANALYSIS
-def sentences_to_indices(X, word_to_index, max_len):
-    m = X.shape[0]                         
-    X_indices = np.zeros((m,max_len))
-    for i in range(m):                               
-        sentence_words = [i.lower() for i in X[i].split()]
-        j = 0
-        for w in sentence_words:
-          try:
-            X_indices[i, j] = word_to_index[w]
-            j = j+1
-          except:
-            continue
-      
-    
-    return X_indices
-
-def label_to_emoji(label):
-    return emoji.emojize(emoji_dictionary[str(label)], use_aliases=True)
-
-
-model = load_model("my_model")
-
-with open('word_to_index.json') as f:
-	    word_to_index = json.load(f)
-
-
 
 app = Flask(__name__)
 app.secret_key = "sfdjkafnk"
@@ -63,10 +30,7 @@ def home():
     if not current_user.is_authenticated:
         return render_template("login.html")
 
-    
-    
-
-
+       
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -188,26 +152,9 @@ def get_older_messages(room_id):
 
 @socketio.on('send_message')
 def handle_send_message_event(data):
-    # app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
-    #                                                                 data['room'],
-    #                                                                 data['message']))
     data['created_at'] = datetime.now().strftime("%d %b, %H:%M")
     
-    indices = sentences_to_indices(np.array([data['message']]), word_to_index, 10)
-    data['sentiment'] = str(np.argmax(model.predict(indices)))
-    if(data['sentiment']=='0'):
-        data['sentiment']=128150
-    elif(data['sentiment']=='1'):
-        data['sentiment']=9917
-    elif(data['sentiment']=='2'):
-        data['sentiment']=128512
-    elif(data['sentiment']=='3'):
-        data['sentiment']=128529
-    elif(data['sentiment']=='4'):
-        data['sentiment']=127860
-    else:
-        pass
-    save_message(data['room'], data['message'], data['username'], data['sentiment'])
+    save_message(data['room'], data['message'], data['username'])
 
     socketio.emit('receive_message', data, room=data['room'])
 

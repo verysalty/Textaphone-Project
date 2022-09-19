@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Textaphone</title>
-</head>
-<body>
-<h1>Edit Room</h1>
-<h3>{{ message }}</h3>
-<form method="post">
-    <label>Room Name:</label>
-    <input type="text" name="room_name" value="{{ room.name }}">
-    <br>
-    <label>Members:</label>
-    <input type="text" name="members" value="{{ room_members_str }}">
-    <br>
-    <button type="submit">Submit</button>
-</form>
-<a href="/rooms/{{ room._id }}/?Chat+Room="><button>Back to Chat Room</button></a>
-<a href="/"><button>Back to Home</button></a>
-</body>
+  </head>
+  <body>
+    <h1>Edit Room</h1>
+    <h3>{{ message }}</h3>
+    <form method="post">
+      <label>Room Name:</label>
+      <input type="text" name="room_name" value="{{ room.name }}" />
+      <br />
+      <label>Members:</label>
+      <input type="text" name="members" value="{{ room_members_str }}" />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/rooms/{{ room._id }}/?Chat+Room="
+      ><button>Back to Chat Room</button></a
+    >
+    <a href="/"><button>Back to Home</button></a>
+  </body>
 </html>

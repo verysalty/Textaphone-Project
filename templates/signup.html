@@ -11,7 +11,7 @@
 <h1>Sign Up</h1>
 <h3>{{ message }}</h3>
 <div class="signup">    
-<form method="post" action="/signup" style="margin-left: 2%;">    
+<form id="formcss" method="post" action="/signup" style="margin-left: 2%;">    
     <label>Username:</label>
     <input type="text" id=Uname name="username">
     <br>
@@ -23,10 +23,9 @@
     <label>Password:</label>
     <input type="password" id=Pass name="password">
     <br>
-    <br>
-    <input type="radio" name="mode" value="blind" /> Visually Impaired
-    <br>
-    <input type="radio" name="mode" value="text" /> Text Only
+    <div id="textradiodiv">
+        <input type="radio" name="mode" value="text" /><span id="textcss">Text Only</span>
+    </div>
     <br>
     <button type="submit" id=log>Submit</button>
 </form>

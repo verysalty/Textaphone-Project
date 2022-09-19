@@ -1,158 +1,97 @@
-@media (min-width:601px){
+@media (min-width:601px) {
 
-body  
-{  
-    margin: 0;  
-    padding: 0;  
-    background-color:#0c71a0ba;  
-    font-family: 'Arial';  
-}  
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #0c71a0ba;
+        font-family: 'Arial';
+    }
 
-.signup{  
-    width: 382px;  
-    overflow: hidden;  
-    margin: auto;  
-    margin: 20 0 0 450px;  
-    padding: 80px;  
-    background: #23463f;  
-    border-radius: 15px ;  
-      
-}  
+    #formcss {
+        display: flex;
+        flex-direction: column;
+    }
 
+    #textradiodiv {
+        display: flex;
+    }
 
-h1{  
-    text-align: center;
-    color: #ffffff;  
-    padding: 20px;  
-} 
- 
-h3{  
-    text-align: center;
-    color: #ffffff;  
-    padding: 20px;  
-}  
-label{  
-    color: #ffffff;  
-    font-size: 17px;  
-}  
-#Uname{  
-    width: 300px;  
-    height: 30px;  
-    border: none;  
-    border-radius: 3px;  
-    padding-left: 8px;  
-}  
+    #textcss {
+        color: #ffffff;
+        font-weight: 600;
+    }
 
-#email{  
-    width: 300px;  
-    height: 30px;  
-    border: none;  
-    border-radius: 3px;  
-    padding-left: 8px;  
-} 
-
-#Pass{  
-    width: 300px;  
-    height: 30px;  
-    border: none;  
-    border-radius: 3px;  
-    padding-left: 8px;  
-      
-}  
-#log{  
-    width: 300px;  
-    height: 30px;  
-    border: none;  
-    border-radius: 17px;  
-    padding-left: 7px;  
-    color: blue;  
-  
-  
-} 
+    .signup {
+        width: 382px;
+        overflow: hidden;
+        margin: auto;
+        margin: 20 0 0 450px;
+        padding: 80px;
+        background: #23463f;
+        border-radius: 15px;
+    }
 
 
-#login{  
-    width: 120px;  
-    height: 40px;  
-    border: none;  
-    border-radius: 17px;  
-    padding-left: 7px;  
-    color: rgb(0, 0, 0);      
-}  
-
-}
-
-
-@media (max-width:600px){
-
-
-    body  
-    {  
-        margin: 0;  
-        padding: 0;  
-        background-color:#0c71a0ba;  
-        font-family: 'Arial';  
-    }  
-    
-    
-    
-    h1{  
+    h1 {
         text-align: center;
-        color: #ffffff;  
-        padding: 20px;  
-    } 
-     
-    h3{  
+        color: #ffffff;
+        padding: 20px;
+    }
+
+    h3 {
         text-align: center;
-        color: #ffffff;  
-        padding: 20px;  
-    }  
-    label{  
-        color: #ffffff;  
-        font-size: 23px;  
-    }  
-    #Uname{  
-        width: 216px;
-    height: 30px;
-    border: none;
-    border-radius: 3px;
-    padding-left: 8px;
-    }  
-    
-    #email{  
-        width: 266px;
+        color: #ffffff;
+        padding: 20px;
+    }
+
+    label {
+        color: #ffffff;
+        font-size: 17px;
+    }
+
+    #Uname {
+        width: 300px;
         height: 30px;
         border: none;
         border-radius: 3px;
         padding-left: 8px;
     }
-    } 
-    
-    #Pass{  
-        width: 222px;
-    height: 30px;
-    border: none;
-    border-radius: 3px;
-    padding-left: 8px;
-          
-    }  
-    #log{  
-        width: 300px;  
-        height: 30px;  
-        border: none;  
-        border-radius: 17px;  
-        padding-left: 7px;  
-        color: blue;  
-        font-size: larger;
-      
-    } 
-    #login{  
-        width: 120px;  
-        height: 40px;  
-        border: none;  
-        border-radius: 17px;  
-        padding-left: 7px;  
-        color: rgb(0, 0, 0);      
-    }  
-    
+
+    #email {
+        width: 300px;
+        height: 30px;
+        border: none;
+        border-radius: 3px;
+        padding-left: 8px;
+    }
+
+    #Pass {
+        width: 300px;
+        height: 30px;
+        border: none;
+        border-radius: 3px;
+        padding-left: 8px;
+
+    }
+
+    #log {
+        width: 300px;
+        height: 30px;
+        border: none;
+        border-radius: 17px;
+        padding-left: 7px;
+        color: blue;
+
+
+    }
+
+    #login {
+        width: 300px;
+        height: 30px;
+        border: none;
+        border-radius: 17px;
+        padding-left: 7px;
+        color: blue;
+    }
+
 }

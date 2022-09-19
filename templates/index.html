@@ -1,111 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Android webapp -->
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes" />
     <!-- IOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if usermode == "text"  %}
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='indexstyletext.css') }}">
-    {% else %}
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='indexstyle.css') }}">
-    {% endif %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textaphone</title>
-</head>
-<body>
-<h1>Textaphone</h1>
-<h3>Hi {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %}!</h3>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='indexstyletext.css') }}"
+    />
 
-{% if current_user.is_authenticated %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Textaphone</title>
+  </head>
+  <body>
+    <h1>Textaphone</h1>
+    <h3>
+      Hi {% if current_user.is_authenticated %}{{ current_user.username }}{%
+      else %}Guest{% endif %}!
+    </h3>
+
+    {% if current_user.is_authenticated %}
     <h3 id="myroom">My rooms</h3>
     <div class="roomlist">
-    <ul>
+      <ul>
         {% for room in rooms %}
-            <form method="get" action="/rooms/{{ room._id.room_id }}">
-                <button id="button" name="{{ room.room_name }}" type="submit">{{ room.room_name }}</button>
-            </form>
+        <form method="get" action="/rooms/{{ room._id.room_id }}">
+          <button id="button" name="{{ room.room_name }}" type="submit">
+            {{ room.room_name }}
+          </button>
+        </form>
         {% endfor %}
-    </ul>
+      </ul>
     </div>
-<div class=container2> 
-    <div class=container> 
-       
-            <button id="decrement" onclick="decrementroom()">previous</button>
-        
-        
-        
-            <button id="increment" onclick="incrementroom()">next</button>
-        
-    
+    <div class="container2">
+      <div class="container">
+        <button id="decrement" onclick="decrementroom()">previous</button>
+
+        <button id="increment" onclick="incrementroom()">next</button>
+      </div>
+      <div>
+        <button id="enterroom" onclick="enter()">Enter</button>
+      </div>
     </div>
-        <div>
-            <button id="enterroom" onclick="enter()">Enter</button>
-        </div>
-</div>
-<button id="createroom" onclick="location.href='/create-room'">Create Room</button>
-<br>
-<button id="createroom" onclick="location.href='/logout'">Logout</button>
+    <button id="createroom" onclick="location.href='/create-room'">
+      Create Room
+    </button>
+    <br />
+    <button id="createroom" onclick="location.href='/logout'">Logout</button>
 
+    {% endif %}
 
-
-
-
-    
-
-{% endif %}
-
-<script>
-    var buttons = document.querySelectorAll( "button[id^='button']" );
-    var counter=-1;
-    var buttonname;
-    function incrementroom() 
-    {   counter++;
-        if(counter==buttons.length)
-            {
-            counter=-1;
-            buttonname=0;
-            incrementroom();
-            }
-        else if(counter>=0){
-            buttonname=buttons[counter];
-            console.log(buttonname);
-            var msg1 = new SpeechSynthesisUtterance(buttonname.name);
-            window.speechSynthesis.speak(msg1);
+    <script>
+      var buttons = document.querySelectorAll("button[id^='button']");
+      var counter = -1;
+      var buttonname;
+      function incrementroom() {
+        counter++;
+        if (counter == buttons.length) {
+          counter = -1;
+          buttonname = 0;
+          incrementroom();
+        } else if (counter >= 0) {
+          buttonname = buttons[counter];
+          console.log(buttonname);
+          var msg1 = new SpeechSynthesisUtterance(buttonname.name);
+          window.speechSynthesis.speak(msg1);
         }
         console.log("counter :" + counter);
-    }
+      }
 
-    function decrementroom() 
-    {   
-        if(counter==0)
-            {
-            counter=buttons.length;
-            decrementroom();
-            }
-        else if(counter>0){
-            counter=counter-1;
-            buttonname=buttons[counter];
-            console.log(buttonname);
-            var msg1 = new SpeechSynthesisUtterance(buttonname.name);
-            window.speechSynthesis.speak(msg1);
-            }
-            console.log("counter :" + counter);
-    }
+      function decrementroom() {
+        if (counter == 0) {
+          counter = buttons.length;
+          decrementroom();
+        } else if (counter > 0) {
+          counter = counter - 1;
+          buttonname = buttons[counter];
+          console.log(buttonname);
+          var msg1 = new SpeechSynthesisUtterance(buttonname.name);
+          window.speechSynthesis.speak(msg1);
+        }
+        console.log("counter :" + counter);
+      }
 
-
-    function enter()
-    {
-        var msg1 = new SpeechSynthesisUtterance("You are now entering" + buttonname.name + "room");
+      function enter() {
+        var msg1 = new SpeechSynthesisUtterance(
+          "You are now entering" + buttonname.name + "room"
+        );
         window.speechSynthesis.speak(msg1);
         buttonname.click();
-    }
-       
-</script>
-
-
-</body>
+      }
+    </script>
+  </body>
 </html>
