@@ -1,0 +1,94 @@
+
+@media (max-width:600px) {
+    body h1{
+        text-align: center;
+    
+    }
+
+    .messages{
+        display: none;
+    }
+
+    #load_older_messages_btn{
+        display: none;
+    }
+    
+    #send{
+        display: none;
+    }
+
+    #message_input{
+        display: none;
+    }
+    .container {
+     display: flex;
+  }
+
+  #message_input_form{
+      display: flex;
+  }
+  .container2 {
+     display: flex;
+     flex-direction: column;
+  }
+     #increment {
+         background-color: #4CAF50;
+         border: none;
+         color: white;
+         padding: 28% 16% 28% 16%;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 34px;
+     } 
+ 
+     #decrement {
+         background-color: orange;
+         border: none;
+         color: white;
+         padding: 50% 9% 50% 9%;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 34px;
+     }
+
+     #rec {
+        background-color: #b10000;
+        border: none;
+        color: white;
+        padding: 28% 12% 28% 12%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 34px;
+    } 
+
+    #back {
+        background-color: rgb(74, 137, 209);
+        border: none;
+        color: white;
+        padding: 50% 15.25% 50% 15.25%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 34px;
+    }
+
+     
+ 
+ #enterroom {
+     background-color: #4babc4;
+     border: none;
+     color: white;
+     padding: 25% 39% 25% 39%;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 34px;
+ } 
+}
+
+
+
+

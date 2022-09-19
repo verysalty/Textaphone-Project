@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='createroomstyle.css') }}">
+    <meta charset="UTF-8">
+    <title>Textaphone</title>
+</head>
+<body>
+<h1>Create Room</h1>
+<h3>{{ message }}</h3>
+<div class="createroom">
+    <form method="post">
+    <label>Room Name:</label>
+    <input type="text" id="room" name="room_name">
+    <br>
+    <label>Members:</label>
+    <input type="text" id="members" name="members">
+    <br>
+    <br>
+    <button id="submit" type="submit">Submit</button>
+</form>
+<br>
+<button onclick="location.href='/'" id="back">Back</button>
+</div>
+</body>
+</html>

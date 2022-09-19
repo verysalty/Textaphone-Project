@@ -1,0 +1,139 @@
+
+
+/* PC Layout */
+@media (min-width:601px){
+body  
+{   text-align: center;
+    margin: 0;  
+    padding: 0;  
+    background-color:#0c71a0ba;  
+    font-family: 'Arial';  
+}  
+
+.login{  
+    width: 382px;  
+    overflow: hidden;  
+    margin: auto;  
+    margin: 20 0 0 450px;  
+    padding: 80px;  
+    background: #23463f;  
+    border-radius: 15px ;  
+      
+}  
+
+h1{ 
+    text-align: center;
+    color: #ffffff;  
+    padding: 20px;  
+} 
+ 
+h3{  
+    text-align: center;
+    color: #ffffff;  
+    padding: 20px;  
+}  
+label{  
+    color: #ffffff;  
+    font-size: 17px;  
+}  
+#Uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#Pass{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+      
+}  
+#log{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+  
+  
+}   
+
+#signup{
+    width: 74px;
+    height: 25px;
+    border: none;
+    margin: 5%;
+    border-radius: 13px;
+    padding-left: 1px;
+    color: blue;
+}
+
+}
+
+
+/* Mobile Layout */
+@media (max-width:600px){
+
+    body  
+    {   text-align: center;
+        margin: 0;  
+        padding: 0;  
+        background-color:#0c71a0ba;  
+        font-family: 'Arial';  
+    }  
+    
+
+    h1{ 
+        text-align: center;
+        color: #ffffff;  
+        padding: 20px;  
+    } 
+     
+    h3{  
+        text-align: center;
+        color: #ffffff;  
+        padding: 20px;  
+    }  
+    label{  
+        color: #ffffff;  
+        font-size: 24px;  
+    }  
+    #Uname{  
+        width: 300px;  
+        height: 30px;  
+        border: none;  
+        border-radius: 3px;  
+        padding-left: 8px;  
+    }  
+    #Pass{  
+        width: 300px;  
+        height: 30px;  
+        border: none;  
+        border-radius: 3px;  
+        padding-left: 8px;  
+          
+    }  
+    #log{  
+        width: 300px;  
+        height: 30px;  
+        border: none;  
+        border-radius: 17px;  
+        padding-left: 7px;  
+        color: blue;  
+    }   
+
+    #signup{
+        width: 74px;
+        height: 25px;
+        border: none;
+        margin: 5%;
+        border-radius: 13px;
+        padding-left: 1px;
+        color: blue;
+    }
+
+}

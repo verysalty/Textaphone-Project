@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if usermode == "text"  %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='viewroomstyletext.css') }}">
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='viewroomstyle.css') }}">
+    {% endif %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textaphone</title>
+</head>
+<body>
+<!-- <h1>Welcome to chat room: {{ room.name }}</h1> -->
+
+<script>var messagesarray = [];
+var messagessender = [];
+</script>
+<button type="button" id="load_older_messages_btn">Load Older Messages</button>
+<div class="messages" id="messages">
+    {% for message in messages %}
+    <script>
+    messagesarray.push("{{ message.text }}");
+    messagessender.push("{{ message.sender }}");
+    </script>
+        <div><b>{{ message.sender }}&nbsp;[{{ message.created_at }}]:&nbsp;</b> {{ message.text }} &#{{ message.sentiment }};</div>
+    {% endfor %}
+</div>
+<div>
+    
+</div>
+
+<div class=container2> 
+    <div class=container> 
+        <button id="decrement" type="button" onclick=previousmessage()>Previous</button>
+        <button id = "increment"  type="button" onclick=nextmessage()>Next</button>
+    
+    </div>
+    <div>
+            <form id="message_input_form">
+                <input type="text" id="message_input" placeholder="Enter your message here">
+                <button id="send" type="submit">Send</button>
+                <button id="rec" type="button" onclick="speechrec()">Record</button>
+                <button id="back" type="button" onclick="exitchatroom()"  >Back</button>
+            </form>
+            <button onclick="edit_room()">Edit Room Members</button>
+    </div>
+</div>
+
+
+
+<!-- <div class="member">
+    <h3>Members</h3>
+    <ul>
+        {% for member in room_members %}
+            <li>{{ member._id.username }}</li>
+        {% endfor %}
+    </ul>
+</div> -->
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+
+function exitchatroom(){
+    var msg1 = new SpeechSynthesisUtterance("You are now in chatroom list page");
+    window.speechSynthesis.speak(msg1);
+    window.history.back();
+}
+var counter=messagesarray.length;
+    function nextmessage()
+    {   console.log(messagesarray);
+        counter++;
+        if(counter>=messagesarray.length)
+            {
+            var msg1 = new SpeechSynthesisUtterance("You have reached most recent message");
+            window.speechSynthesis.speak(msg1);
+            counter=counter=messagesarray.length;
+            }
+        else if(counter<messagesarray.length){
+            var msg1 = new SpeechSynthesisUtterance(messagessender[counter] + " says " + messagesarray[counter]);
+            window.speechSynthesis.speak(msg1);
+        }
+    }
+
+    function previousmessage()
+    {   
+        counter--;
+        if(counter==-1)
+            {
+            counter=0;
+            var msg1 = new SpeechSynthesisUtterance("You have Reached Message History Limit");
+            msg1.pitch=1;
+            msg1.rate=1;
+            window.speechSynthesis.speak(msg1);
+            }
+        else if(counter>=0){
+            var msg1 = new SpeechSynthesisUtterance(messagessender[counter] + " says " + messagesarray[counter]);
+            msg1.pitch=1;
+            msg1.rate=1;
+            window.speechSynthesis.speak(msg1);
+        }
+    }
+
+
+    const socket = io.connect("http://localhost:80");
+
+    socket.on('connect', function () {
+        socket.emit('join_room', {
+            username: "{{ username }}",
+            room: "{{ room._id }}"
+        });
+
+        let message_input = document.getElementById('message_input');
+
+        document.getElementById('message_input_form').onsubmit = function (e) {
+            e.preventDefault();
+            let message = message_input.value.trim();
+            if (message.length) {
+                socket.emit('send_message', {
+                    username: "{{ username }}",
+                    room: "{{ room._id }}",
+                    message: message
+                })
+            }
+            
+            message_input.value = '';
+            message_input.focus();
+        }
+    });
+
+    function edit_room() {
+        window.location.href = "/rooms/{{ room._id }}/edit"
+    }
+
+    function speechrec() {
+		        // get output div reference
+		        var output = document.getElementById("output");
+		        // get action element reference
+		        var action = document.getElementById("action");
+                // new speech recognition object
+                var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+            
+                // This runs when the speech recognition service starts
+                recognition.onstart = function() {
+                    console.log("listening, please speak...");
+                };
+                
+                recognition.onspeechend = function() {
+                    console.log("stopped listening");                  
+                      recognition.stop();
+                }
+              
+                // This runs when the speech recognition service returns result
+                recognition.onresult = function(event) {
+                    var transcript = event.results[0][0].transcript;
+                    var confidence = event.results[0][0].confidence;
+                    message_input.value = transcript;
+                    let message = message_input.value.trim();
+                    if (message.length) {
+                    socket.emit('send_message', {
+                    username: "{{ username }}",
+                    room: "{{ room._id }}",
+                    message: message
+                    
+                })
+                messagesarray.push("{{ send_message }}");
+                messagessender.push("{{ username }}");
+                counter=messagesarray.length;
+                var msg1 = new SpeechSynthesisUtterance("Your sent message was, " + message);
+                msg1.pitch=1;
+                msg1.rate=1;
+                window.speechSynthesis.speak(msg1);
+            }
+            message_input.value = '';
+            message_input.focus();
+            
+
+                };
+              
+                 // start recognition
+                 recognition.start();
+                 
+	        }
+    let page = 0;
+
+    document.getElementById("load_older_messages_btn").onclick = (e) => {
+        page += 1;
+        fetch("/rooms/{{ room._id }}/messages?page=" + page, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            response.json().then(messages => {
+                messages.reverse().forEach(message => prepend_message(message.text, message.sender, message.created_at, message.sentiment));
+            })
+        })
+
+    };
+
+    function prepend_message(message, username, created_at, sentiment ){
+        const newNode = document.createElement('div');
+        newNode.innerHTML = `<b>${username}&nbsp;[${created_at}]:&nbsp;</b> ${message} &#${sentiment};`;
+        const messages_div = document.getElementById('messages');
+        messages_div.insertBefore(newNode, messages_div.firstChild);
+        messagesarray.push({ message });
+        messagessender.push({username});
+        
+    }
+
+    window.onbeforeunload = function () {
+        socket.emit('leave_room', {
+            username: "{{ username }}",
+            room: "{{ room._id }}"
+        })
+    };
+
+    socket.on('receive_message', function (data) {
+        const newNode = document.createElement('div');
+        newNode.innerHTML = `<b>${data.username}&nbsp;[${data.created_at}]:&nbsp;</b> ${data.message} &#${data.sentiment}; `;
+        document.getElementById('messages').appendChild(newNode);
+        if( data.username !== "{{ username }}") {
+        var msg1 = new SpeechSynthesisUtterance(data.username + "  says...." + data.message );
+        if(data.sentiment==128529){ 
+            // Dissapointed
+            msg1.pitch=0.7;
+            msg1.rate=1.4;
+            window.speechSynthesis.speak(msg1);
+            var msg1 = new SpeechSynthesisUtterance(", Negative mood detected.");
+            window.speechSynthesis.speak(msg1);
+            }
+        else if(data.sentiment==9917){
+            // Football
+            window.speechSynthesis.speak(msg1);
+            var msg1 = new SpeechSynthesisUtterance(", Mood Detected, sporty.");
+            window.speechSynthesis.speak(msg1);
+        }
+        else if(data.sentiment==127860){
+            // Eat
+            window.speechSynthesis.speak(msg1);
+            var msg1 = new SpeechSynthesisUtterance(", Mood detected , Feeling hungry ");
+            window.speechSynthesis.speak(msg1);
+        }
+        else if(data.sentiment==128512){
+            // smile
+            msg1.pitch=1.2;
+            msg1.rate=1.1;
+            window.speechSynthesis.speak(msg1);
+            var msg1 = new SpeechSynthesisUtterance(", Mood Detected, Positive.");
+            window.speechSynthesis.speak(msg1);
+        }
+        else if(data.sentiment==128150){
+            // love
+            msg1.pitch=1.1;
+            msg1.rate=0.8;
+            window.speechSynthesis.speak(msg1);
+            var msg1 = new SpeechSynthesisUtterance(", Mood Detected, love.");
+            window.speechSynthesis.speak(msg1);
+        }
+        console.log(data.sentiment);
+        messagesarray.push(data.username);
+        messagessender.push(data.username);
+        console.log(messagessender);
+        }
+    });
+
+    socket.on('join_room_announcement', function (data) {
+        console.log(data);
+        if (data.username !== "{{ username }}") {
+            const newNode = document.createElement('div');
+            newNode.innerHTML = `<b>${data.username}</b> has joined the room`;
+            document.getElementById('messages').appendChild(newNode);
+        }
+    });
+
+    socket.on('leave_room_announcement', function (data) {
+        console.log(data);
+        const newNode = document.createElement('div');
+        newNode.innerHTML = `<b>${data.username}</b> has left the room`;
+        document.getElementById('messages').appendChild(newNode);
+    });
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='signupstyle.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textaphone</title>
+</head>
+<body>
+<h1>Sign Up</h1>
+<h3>{{ message }}</h3>
+<div class="signup">    
+<form method="post" action="/signup" style="margin-left: 2%;">    
+    <label>Username:</label>
+    <input type="text" id=Uname name="username">
+    <br>
+    <br>
+    <label>Email:</label>
+    <input type="email" id="email" name="email">
+    <br>
+    <br>
+    <label>Password:</label>
+    <input type="password" id=Pass name="password">
+    <br>
+    <br>
+    <input type="radio" name="mode" value="blind" /> Visually Impaired
+    <br>
+    <input type="radio" name="mode" value="text" /> Text Only
+    <br>
+    <button type="submit" id=log>Submit</button>
+</form>
+<br>
+<button onclick="location.href='/login'" id="login">Already Registered?</button>
+</div>
+</body>
+</html>
+
+
+
+

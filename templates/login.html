@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Android webapp -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- IOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyle.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textaphone</title>
+</head>
+<body>
+<h1>Login Page</h1>
+<h3>{{ message }}</h3>
+<div class="login">    
+    <form method="post" action="/login">
+    <label>Username:</label>
+    <input type="text" id=Uname name="username">
+    <br>
+    <br>
+    <label>Password:</label>
+    <input type="password" id=Pass name="password">
+    <br>
+    <br>
+    <button type="submit" id="log">Submit</button>
+    <br>
+    </form>
+<button onclick="location.href='/signup'" id="signup">Signup</button>
+</div>
+</body>
+</html>
