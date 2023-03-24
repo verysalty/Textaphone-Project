@@ -1,25 +1,30 @@
 @media (max-width:600px) {
-   body h1{
-       text-align: center;
-       display: none;
-   }
-   h3{
-    display: none;
-}
-   #myroom{
-    display: none;
-   }
-   .roomlist{
-    display: none;
-   }
+    body h1 {
+        text-align: center;
+        display: none;
+    }
 
-   .container {
-    display: flex;
- }
- .container2 {
-    display: flex;
-    flex-direction: column;
- }
+    h3 {
+        display: none;
+    }
+
+    #myroom {
+        display: none;
+    }
+
+    .roomlist {
+        display: none;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .container2 {
+        display: flex;
+        flex-direction: column;
+    }
+
     #increment {
         background-color: #4CAF50;
         border: none;
@@ -29,7 +34,7 @@
         text-decoration: none;
         display: inline-block;
         font-size: 34px;
-    } 
+    }
 
     #decrement {
         background-color: orange;
@@ -41,17 +46,23 @@
         display: inline-block;
         font-size: 34px;
     }
-    
 
-#enterroom {
-    background-color: #4babc4;
-    border: none;
-    color: white;
-    padding: 25% 39% 25% 39%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 34px;
-} 
+
+    #enterroom {
+        background-color: #4babc4;
+        border: none;
+        color: white;
+        padding: 25% 39% 25% 39%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 34px;
+    }
+
+    .mobileblind {
+        background-color: yellow;
+        display: none;
+        color: yellow;
+    }
 
 }

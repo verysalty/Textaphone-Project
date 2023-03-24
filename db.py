@@ -8,7 +8,7 @@ from user import User
 
 
 
-client = MongoClient("mongodb+srv://naikpramathesh:K6yGSutNalH220kb@textaphonecluster.pmz2ted.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://naikpramathesh:IWYHaNTJYU3Ah2PC@textaphonecluster.pmz2ted.mongodb.net/?retryWrites=true&w=majority")
 
 chat_db = client.get_database("ChatDB")
 users_collection = chat_db.get_collection("users")
